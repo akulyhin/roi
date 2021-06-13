@@ -15,7 +15,8 @@ const refs = {
     conversionResult: document.querySelector('.conversion-result'),
     salesResult: document.querySelector('.sales-result'),
     coastTransaction: document.querySelector('.coast-transaction-result'),
-    coastSales: document.querySelector('.coast-sales-result')
+    coastSales: document.querySelector('.coast-sales-result'),
+    avarageCheck: document.querySelector('.avarage-check')
 }
 
 export default refs;

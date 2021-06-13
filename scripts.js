@@ -10,20 +10,23 @@ refs.coastads.addEventListener('focus', (e) => {
 });
 
 
-refs.coastads.addEventListener('input', (e) => {
-    refs.coastads.value = takeSpace(e.target.value);
+    refs.coastads.addEventListener('input', (e) => {
+        refs.coastads.value = takeSpace(e.target.value);
 
-    if (refs.income.value !== '') {
-        incomeResult = (+e.target.value / takeSpace(refs.income.value)) * 100;
+        localStorage.setItem('coastads', e.target.value);
 
-        refs.incomeResult.textContent = `${incomeResult.toFixed(2)} %`;
-    }
+        if (refs.income.value !== '') {
+            incomeResult = (+e.target.value / takeSpace(refs.income.value)) * 100;
 
-    else {
-        return
-    }
+            refs.incomeResult.textContent = `${incomeResult.toFixed(2)} %`;
+        }
 
-})
+        else {
+            return
+        }
+
+    })
+
 
 refs.coastads.addEventListener('blur', (e) => {
     e.target.value = numeric(e.target.value);
@@ -38,6 +41,8 @@ refs.income.addEventListener('focus', (e) => {
 
 refs.income.addEventListener('input', (e) => {
     refs.income.value = takeSpace(e.target.value);
+
+    localStorage.setItem('income', e.target.value);
 
     let roasResult = 0;
 
@@ -69,17 +74,22 @@ refs.income.addEventListener('blur', (e) => {
 
 refs.views.addEventListener('input', (e) => {
     e.target.value = takeSpace(e.target.value);
-let viewResult = 0;
 
-if (refs.income.value) {
-    viewResult = takeSpace(refs.coastads.value) / +e.target.value * 1000;
-    refs.viewResult.textContent = `${viewResult.toFixed(2)} грн.`
-}
+    localStorage.setItem('views', e.target.value);
+    
+    let viewResult = 0;
+    
+    if (refs.income.value) {
+        viewResult = takeSpace(refs.coastads.value) / +e.target.value * 1000;
+        refs.viewResult.textContent = `${viewResult.toFixed(2)} грн.`
+    }
 })
 
 
 refs.clicks.addEventListener('input', (e) => {
     e.target.value = takeSpace(e.target.value);
+    localStorage.setItem('clicks', e.target.value);
+    
     let clickResult = 0;
     let clickCoast = 0;
 
@@ -95,21 +105,23 @@ refs.clicks.addEventListener('input', (e) => {
 
 refs.transaction.addEventListener('input', (e) => {
 e.target.value = takeSpace(e.target.value);
+localStorage.setItem('transaction', e.target.value);
 
- let conversion = 0;
- let coastTransaction = 0;
 
-    if (refs.clicks.value) {
-        conversion = +e.target.value / +refs.clicks.value * 100;
+let conversion = 0;
+let coastTransaction = 0;
 
-        refs.conversionResult.textContent = `${conversion.toFixed(2)} %`
-    }
+if (refs.clicks.value) {
+    conversion = +e.target.value / +refs.clicks.value * 100;
+    
+    refs.conversionResult.textContent = `${conversion.toFixed(2)} %`
+}
 
-    if (refs.coastads.value) {
-        coastTransaction = takeSpace(refs.coastads.value) / +e.target.value;
-
-        refs.coastTransaction.textContent = `${coastTransaction.toFixed(2)} грн.`
-    }
+if (refs.coastads.value) {
+    coastTransaction = takeSpace(refs.coastads.value) / +e.target.value;
+    
+    refs.coastTransaction.textContent = `${coastTransaction.toFixed(2)} грн.`
+}
 
 
 })
@@ -117,19 +129,57 @@ e.target.value = takeSpace(e.target.value);
 
 refs.sales.addEventListener('input', (e) => {
     e.target.value = takeSpace(e.target.value);
+    localStorage.setItem('sales', e.target.value);
+
+    
 
     let salesResult = 0;
+    let coastSales = 0;
+    let avarageCheck = 0;
 
     if (refs.transaction.value) {
         salesResult = +e.target.value / +refs.transaction.value * 100;
 
         refs.salesResult.textContent = `${salesResult.toFixed(2)} %`
     }
+
+    if (refs.coastads.value) {
+        coastSales = takeSpace(refs.coastads.value) / +e.target.value;
+
+        refs.coastSales.textContent = `${coastSales.toFixed(2)} грн.`
+    }
+
+    if (refs.income.value) {
+        avarageCheck = takeSpace(refs.income.value) / +e.target.value;
+
+        refs.avarageCheck.textContent = `${avarageCheck.toFixed(2)} грн.`
+    }
 })
 
 
+// if (localStorage.getItem('coastads')) {
+//     refs.coastads.value = numeric(localStorage.getItem('coastads'));
+// }
 
+// if (localStorage.getItem('income')) {
+//     refs.income.value = numeric(localStorage.getItem('income'));
+// }
 
+// if (localStorage.getItem('views')) {
+//     refs.views.value = localStorage.getItem('views');
+// }
+
+// if (localStorage.getItem('clicks')) {
+//     refs.clicks.value = localStorage.getItem('clicks');
+// }
+
+// if (localStorage.getItem('transaction')) {
+//     refs.transaction.value = localStorage.getItem('transaction');
+// }
+
+// if (localStorage.getItem('sales')) {
+//     refs.sales.value = localStorage.getItem('sales');
+// }
 
 function takeSpace(num) {
     return num.replace(/\s/g, '');
@@ -142,3 +192,6 @@ function numeric(data) {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
   })
+
+
+ 
