@@ -5,6 +5,8 @@ const refs = {
     clicks: document.getElementById('clicks'),
     transaction: document.getElementById('transaction'),
     sales: document.getElementById('sales'),
+    calculatorInputs: document.querySelectorAll('.calculator input'),
+    btnCalc: document.querySelector('.btn-calc'),
 // Result
     incomeResult: document.querySelector('.income-result'),
     viewResult: document.querySelector('.view-result'),

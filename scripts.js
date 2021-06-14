@@ -181,6 +181,9 @@ refs.sales.addEventListener('input', (e) => {
 //     refs.sales.value = localStorage.getItem('sales');
 // }
 
+
+
+
 function takeSpace(num) {
     return num.replace(/\s/g, '');
 }
