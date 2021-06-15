@@ -208,11 +208,69 @@ calcAmount(refs.desiredAmount.value);
 
 function calcAmount (amount) {
 
-const percentAmount = document.querySelector('.income-result span');
-console.log(percentAmount.textContent);
 
-let total = +amount * 100 / +percentAmount.textContent;
-refs.staticAmount.value = `${numeric(total.toFixed(0))} грн.`;
+
+const percentAmount = document.querySelector('.income-result span');
+
+if (percentAmount.textContent) {
+    let total = +amount * 100 / +percentAmount.textContent;
+
+    refs.staticAmount.value = `${numeric(total.toFixed(0))} грн.`;
+}
+
+else {
+
+    refs.income.addEventListener('input', (e) => {
+        refs.income.value = takeSpace(e.target.value);
+    
+        localStorage.setItem('income', e.target.value);
+    
+        let roasResult = 0;
+
+        refs.staticAmount.value = e.target.value;
+    
+        if (refs.coastads.value !== '') {
+            incomeResult = (takeSpace(refs.coastads.value) / e.target.value) * 100;
+    
+            refs.incomeResult.textContent = incomeResult.toFixed(2);
+    
+    
+            roasResult = +e.target.value / takeSpace(refs.coastads.value) * 100;
+    
+            refs.roasResult.textContent = `${Math.round(roasResult)} %`;
+    
+            let roastText = roasResult / 100;
+            refs.roastText.textContent = `Каждая потраченная гривна приносит дохода: ${roastText.toFixed(2)} грн.`;
+            
+        }
+    
+        else {
+            return
+        }
+    
+    })
+
+
+    refs.coastads.addEventListener('input', (e) => {
+        refs.coastads.value = takeSpace(e.target.value);
+
+        refs.desiredAmount.value = e.target.value;
+
+        localStorage.setItem('coastads', e.target.value);
+
+        if (refs.income.value !== '') {
+            incomeResult = (+e.target.value / takeSpace(refs.income.value)) * 100;
+
+            refs.incomeResult.textContent = incomeResult.toFixed(2);
+        }
+
+        else {
+            return
+        }
+
+    })
+
+}
 }
 
 function takeSpace(num) {
