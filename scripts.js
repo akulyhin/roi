@@ -113,7 +113,19 @@ let coastTransaction = 0;
 
 if (refs.clicks.value) {
     conversion = +e.target.value / +refs.clicks.value * 100;
-    
+    console.log(conversion);
+
+
+    if (conversion >= 2) {
+        refs.bgConversion.style.backgroundColor = '#00a65a';
+    }
+    else if (conversion < 2 && conversion > 1.5) {
+        refs.bgConversion.style.backgroundColor = 'orange';
+    }
+
+    else {
+        refs.bgConversion.style.backgroundColor = 'red';
+    }
     refs.conversionResult.textContent = `${conversion.toFixed(2)} %`
 }
 

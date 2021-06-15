@@ -22,7 +22,10 @@ const refs = {
 
     desiredAmount: document.getElementById('desiredAmount'),
     desiredRange: document.getElementById('desiredRange'),
-    staticAmount: document.getElementById('static')
+    staticAmount: document.getElementById('static'),
+
+    // icons
+    bgConversion: document.getElementById('bg-conversion')
 }
 
 export default refs;
