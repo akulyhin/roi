@@ -263,7 +263,7 @@ else {
 
             refs.incomeResult.textContent = incomeResult.toFixed(2);
         }
-
+        
         else {
             return
         }
