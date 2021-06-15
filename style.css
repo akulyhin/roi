@@ -25,6 +25,10 @@ header img {
     text-transform: uppercase;
 }
 
+section.calc {
+    padding-bottom: 120px;
+}
+
 
 .info-box {
     display: flex;

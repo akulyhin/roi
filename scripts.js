@@ -18,7 +18,7 @@ refs.coastads.addEventListener('focus', (e) => {
         if (refs.income.value !== '') {
             incomeResult = (+e.target.value / takeSpace(refs.income.value)) * 100;
 
-            refs.incomeResult.textContent = `${incomeResult.toFixed(2)} %`;
+            refs.incomeResult.textContent = incomeResult.toFixed(2);
         }
 
         else {
@@ -49,7 +49,7 @@ refs.income.addEventListener('input', (e) => {
     if (refs.coastads.value !== '') {
         incomeResult = (takeSpace(refs.coastads.value) / e.target.value) * 100;
 
-        refs.incomeResult.textContent = `${incomeResult.toFixed(2)} %`;
+        refs.incomeResult.textContent = incomeResult.toFixed(2);
 
 
         roasResult = +e.target.value / takeSpace(refs.coastads.value) * 100;
@@ -157,32 +157,63 @@ refs.sales.addEventListener('input', (e) => {
 })
 
 
-// if (localStorage.getItem('coastads')) {
-//     refs.coastads.value = numeric(localStorage.getItem('coastads'));
-// }
+if (localStorage.getItem('coastads')) {
+    refs.coastads.value = numeric(localStorage.getItem('coastads'));
+}
 
-// if (localStorage.getItem('income')) {
-//     refs.income.value = numeric(localStorage.getItem('income'));
-// }
+if (localStorage.getItem('income')) {
+    refs.income.value = numeric(localStorage.getItem('income'));
+}
 
-// if (localStorage.getItem('views')) {
-//     refs.views.value = localStorage.getItem('views');
-// }
+if (localStorage.getItem('views')) {
+    refs.views.value = localStorage.getItem('views');
+}
 
-// if (localStorage.getItem('clicks')) {
-//     refs.clicks.value = localStorage.getItem('clicks');
-// }
+if (localStorage.getItem('clicks')) {
+    refs.clicks.value = localStorage.getItem('clicks');
+}
 
-// if (localStorage.getItem('transaction')) {
-//     refs.transaction.value = localStorage.getItem('transaction');
-// }
+if (localStorage.getItem('transaction')) {
+    refs.transaction.value = localStorage.getItem('transaction');
+}
 
-// if (localStorage.getItem('sales')) {
-//     refs.sales.value = localStorage.getItem('sales');
-// }
+if (localStorage.getItem('sales')) {
+    refs.sales.value = localStorage.getItem('sales');
+}
 
 
+if (refs.income.value !== '' && refs.coastads.value) {
+    incomeResult = (takeSpace(refs.coastads.value) / takeSpace(refs.income.value)) * 100;
 
+    refs.incomeResult.textContent = incomeResult.toFixed(2);
+}
+
+refs.desiredAmount.value = takeSpace(refs.coastads.value);
+
+refs.desiredRange.value = refs.desiredAmount.value;
+
+refs.desiredRange.addEventListener('input', (e) => {
+refs.desiredAmount.value = e.target.value;
+
+calcAmount(refs.desiredAmount.value);
+})
+
+refs.desiredAmount.addEventListener('input', (e) => {
+    refs.desiredRange.value = e.target.value;
+
+    calcAmount(e.target.value);
+})
+
+calcAmount(refs.desiredAmount.value);
+
+function calcAmount (amount) {
+
+const percentAmount = document.querySelector('.income-result span');
+console.log(percentAmount.textContent);
+
+let total = +amount * 100 / +percentAmount.textContent;
+refs.staticAmount.value = `${numeric(total.toFixed(0))} грн.`;
+}
 
 function takeSpace(num) {
     return num.replace(/\s/g, '');

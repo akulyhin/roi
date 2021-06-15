@@ -8,7 +8,7 @@ const refs = {
     calculatorInputs: document.querySelectorAll('.calculator input'),
     btnCalc: document.querySelector('.btn-calc'),
 // Result
-    incomeResult: document.querySelector('.income-result'),
+    incomeResult: document.querySelector('.income-result span'),
     viewResult: document.querySelector('.view-result'),
     ctrResult: document.querySelector('.ctr-result'),
     clickCoast: document.querySelector('.click-coast-result'),
@@ -18,7 +18,11 @@ const refs = {
     salesResult: document.querySelector('.sales-result'),
     coastTransaction: document.querySelector('.coast-transaction-result'),
     coastSales: document.querySelector('.coast-sales-result'),
-    avarageCheck: document.querySelector('.avarage-check')
+    avarageCheck: document.querySelector('.avarage-check'),
+
+    desiredAmount: document.getElementById('desiredAmount'),
+    desiredRange: document.getElementById('desiredRange'),
+    staticAmount: document.getElementById('static')
 }
 
 export default refs;
